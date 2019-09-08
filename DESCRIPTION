@@ -1,0 +1,16 @@
+Package: dfnetter
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Author: Who wrote it
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: In many occasions (social science) researchers store their network data in simple
+    data frames, mostly for conviniences ressons. However, many of the well known social network 
+    analysis tools require special network data structures or at least adjacency list or matrices. 
+    The procedures provided wihth package help to convert networks trapped into data.frames into 
+    common network objects. 
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
