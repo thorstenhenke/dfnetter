@@ -1,5 +1,8 @@
 source("data-raw/utils.R")
 
+# We will create two datasets that can be used in the examples and also to test the
+# code provided with this package.
+
 ng <- 5:10
 id <- rep(1:length(ng), ng)
 
@@ -9,9 +12,17 @@ nets <- lapply(ng, function(i) {
     data.frame(x)
 })
 
-# Fall 1 strikt aufteigend
+###                       ###
+###         Case 1        ###
+###                 ``    ###
+
 df_strict <- do.call("rbind", nets)
 df_strict <- cbind.data.frame(id = 1:length(id), g = id, df_strict)
+
+
+###                       ###
+###         Case 2        ###
+###                 ``    ###
 
 # Fall 2 direkt an der id festgemacht
 # Neeee, das trifft den Fall auf jeden Fall noch nicht so richtig?
@@ -23,6 +34,5 @@ df_random <- cbind.data.frame(id = 1:length(id), g = id, df_random)
 
 
 rm(list = setdiff(ls(), c('df_strict', 'df_random')))
-# Save statement
 
-usethis::use_data("DATASET")
+usethis::use_data(df_strict, df_random)
