@@ -37,7 +37,18 @@ crop_network <- function(x, i)  {
     mapply(FUN = crop_network, x = x, i = i)
 }
 
-extract_network <- function(df, g = NULL, vars, ids = NULL, names = NULL) {
+#' Extract networks from a data.frame
+#'
+#' @param vars A vector that indicates all variables that potentially contain network data. This can either be a vector of numeric or logic indices or one of the indicator functions `ends_with()`, `starts_with()` and `contains()`.
+#' @param ids A vector or a column variable name that uniquely identifes each row -- aka participant -- in the dataset.
+#' @param names An optional vector or column name that can later be used to label/identify
+#' nodes in the extracted networks.
+#' @param g A vector or column name that identifies groups in the dataset. This parameter is only needed when operating with multilevel network data.
+#' @param node_cov A vector or column name that
+#' @return
+#' @export
+extract_network <- function(df, g = NULL, vars, ids, names = get_names(ids),
+                            net_cov, node_cov, outcome = c("network", "generic", "igraph")) {
     stopifnot(is.data.frame(df))
     stopifnot(is.vector(g))
     stopifnot(nrow(df) == length(g))
@@ -63,6 +74,18 @@ extract_network <- function(df, g = NULL, vars, ids = NULL, names = NULL) {
         names <- if (!is.null(g)) split(names, g)
         cn <- name_nodes(cn, names)
     }
+
+    if (!missing(net_cov)) {
+        # We don't care about single networks. if the user likes to use
+        # our software this way, that's ok
+    }
+
+    if (!missing(node_cov)) {
+
+    }
+
+    # check if installed if not fail
+    out_mode <- match.arg(outcome)
 
     cn
 }
