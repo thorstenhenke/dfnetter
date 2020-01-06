@@ -1,16 +1,16 @@
 Package: dfnetter
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: In many occasions (social science) researchers store their network data in simple
-    data frames, mostly for conviniences ressons. However, many of the well known social network 
-    analysis tools require special network data structures or at least adjacency list or matrices. 
-    The procedures provided wihth package help to convert networks trapped into data.frames into 
-    common network objects. 
+Title: Automatically extract multilevel network data from a data.frame
+Version: 0.9.0
+Authors@R: person("Thorsten", "Henke", email = "dfnetter@thorsten-henke.de", role = c("aut", "cre")) 
+Description: Researchers often store their collected network data in a tabular data format. 
+    However, for most of the network packaages available for the R statistics suite a 
+    tabular data format is not suitable and the data need to be transoformed into more 
+    common data structures like edge lists, adjacency lists, adjacency matrices, etc. Since
+    this is a repetiitve task thats needs to be performed by many ressearchers, over
+    and over again procedures are provided taht simplify this task. 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
