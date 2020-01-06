@@ -2,33 +2,32 @@ validity_check_regex_internal <- function(r) {
     stopifnot(is.character(r))
     stopifnot(length(r) == 1)
     stopifnot(grepl("^[X.]+$", r))
-    # Der Fall von nur einem X (ein Fehler!) ist nicht abgedeckt.
 }
 
 gen_regex_internal <- function(pseudo_r) {
-    # Schwierig, wenn man auch X.X.XX erfassen will
-    pseudo_rv <- strsplit(pseudo_r, split = "")[[1]]
-    real_regex <- ""
-    i <- 1
-    while(i <= length(pseudo_rv)) {
-        if (pseudo_rv[[i]] == "X") {
-            real_regex <- append(real_regex, ".")
-            i <- i + 1
-        } else {
-            real_regex <- append(real_regex, "(")
-            while(i <= length(pseudo_rv) && (pseudo_rv[[i]] == ".")) {
-                real_regex <- append(real_regex, ".")
-                i <- i + 1
-            }
-            real_regex <- append(real_regex, ")")
-        }
-        message("Outer Loop i = ", i)
+    # Einfach in die Syntax einbringen, eine 0 als Kennzeichen, dass es eine
+    # Id mit ein oder zwei stellen haben koennte.
+    validity_check_regex_internal(pseudo_r)
+    pseudo_r <- gsub('X\\.', 'X(.', pseudo_r)
+    pseudo_r <- gsub('\\.X', '.)X', pseudo_r)
+    pseudo_r <- gsub('^\\.', '(.', pseudo_r)
+    pseudo_r <- gsub('\\.$', '.)', pseudo_r)
+    gsub('X', '.', pseudo_r)
+}
 
-        if (i > 100) stop("Too Many characters!")
-
-    }
-    paste(real_regex, collapse = "")
+gen_replace_internal <- function(regex) {
+    n <- nchar(gsub("[^(]", "", regex))
+    if (n == 0) return("")
+    paste("\\", 1:n, sep = "", collapse = "")
 }
 
 # numconv : convert a..z and A..Z to numbers where a and A are considered the same
-id_by_pattern <- function(numconv = TRUE)
+id_by_pattern <- function(x, p, numconv = TRUE) {
+
+    if (numconv) {
+        old <- paste(letters, collapse = "")
+        new <- paste(1:26, collapse = "")
+        i <- chartr(old = old, new = new, x = tolower(x))
+    }
+    i
+}
