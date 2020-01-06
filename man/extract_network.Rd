@@ -9,7 +9,7 @@ extract_network(
   g = NULL,
   vars,
   ids,
-  names = get_names(id),
+  names = get_names(ids),
   net_cov,
   node_cov,
   outcome = c("network", "generic", "igraph")
@@ -18,11 +18,9 @@ extract_network(
 \arguments{
 \item{g}{A vector or column name that identifies groups in the dataset. This parameter is only needed when operating with multilevel network data.}
 
-\item{vars}{A vector that indicates all variable that potentially contain network data. This
-can either be a vector of numeric or logic indices or one of the indicator functions
-\code{ends_with()}, \code{starts_with()} and \code{contains()}.}
+\item{vars}{A vector that indicates all variables that potentially contain network data. This can either be a vector of numeric or logic indices or one of the indicator functions \code{ends_with()}, \code{starts_with()} and \code{contains()}.}
 
-\item{ids}{A vector or variable name that uniquely identifes each row aka participant in the dataset.}
+\item{ids}{A vector or a column variable name that uniquely identifes each row -- aka participant -- in the dataset.}
 
 \item{names}{An optional vector or column name that can later be used to label/identify
 nodes in the extracted networks.}
